@@ -1,0 +1,35 @@
+<h1 class="display-1 text-center">Rated Albums:</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Artist</th>
+      <th scope="col">Title</th>
+      <th scope="col">Year</th>
+      <th scope="col">Value</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if !isempty(rated_albums) for_each(rated_albums) do rating_tuple
+      partial(joinpath(Genie.config.path_resources, "ratings" , "views" , "_rating.jl.html" ), rating=rating_tuple[1],
+      album=rating_tuple[2]) end end %>
+  </tbody>
+</table>
+
+<h1 class="display-1 text-center">Deleted albums:</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Artist</th>
+      <th scope="col">Title</th>
+      <th scope="col">Year</th>
+      <th scope="col">Value</th>
+      <th scope="col">Actions</th>  
+    </tr>
+  </thead>
+  <tbody>
+    <% if !isempty(dropped_albums) for_each(dropped_albums) do rating_tuple
+      partial(joinpath(Genie.config.path_resources, "ratings" , "views" , "_rating.jl.html" ), rating=rating_tuple[1],
+      album=rating_tuple[2]) end end %>
+  </tbody>
+</table>

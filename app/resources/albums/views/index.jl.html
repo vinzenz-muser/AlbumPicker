@@ -1,0 +1,11 @@
+
+<h1 class="display-1 text-center">Listen to:</h1>
+
+<%
+if !isempty(albums)
+  for_each(albums) do album
+    partial(joinpath(Genie.config.path_resources, "albums", "views", "_album.jl.html"), album = album)
+  end
+end
+%>
+

@@ -1,0 +1,7 @@
+<tr>
+    <td>$(album.artist)</td>
+    <td>$(album.title)</td>
+    <td>$(album.year)</td>
+    <td>$(rating.value == -1 ? "-" : rating.value)</td>
+    <td><a href="$( linkto(:delrating, id=rating.id))" class="btn btn-danger btn-sm" tabindex="-1" role="button" aria-disabled="true">x</a></td>
+</tr>

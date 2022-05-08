@@ -1,0 +1,80 @@
+<div class="container" style="margin: auto; margin-top: 40px;">
+    <div class="row">
+        <div class="col">
+            <h3 class="text-center">
+                <% album.title %> - <% album.artist %> ($(album.year))
+            </h3>
+        </div>
+    </div>
+    <% if album.image_url !=""
+        partial(joinpath(Genie.config.path_resources, "albums", "views", "_album_single.jl.html"), album = album)
+    end %>
+    
+    <% if Main.UserApp.AlbumPicker.GenieAuthentication.authenticated() %>
+    <div>
+    <div class="row mt-4">
+        <div class="col">
+            <h3 class="text-center">Done listening? Rate the album!</h3>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6 align-self-center">
+            <form action="$( linkto(:save_rating) )" method="POST" enctype="multipart/form-data">
+                <div class="form-group text-center mt-4">
+                    <label for="value">What's your rating?</label>
+                    <select class="form-control mt-2 form-control-lg text-center" id="value" name="value">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </div>
+                <div class="form-group text-center  mt-4">
+                    <label for="comment">Any Comments? </label>
+                    <textarea class="form-control mt-2" id="comment" name="comment" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mt-4 m-auto d-block">Save rating and go to next album!</button>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <h3 class="text-center">Don't want to listen to it?</h3>
+            <div class="row justify-content-center">
+                <div class="col-6 text-center">
+                    <a href="$( linkto(:skip) )" class="btn btn-secondary" role="button" aria-disabled="true">Skip album for now</a>
+                    <a href="$( linkto(:dontdo) )" class="btn btn-danger" role="button" aria-disabled="true">Don't listen to album at all</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <% else %>
+    <div>
+        <div class="row mt-4">
+            <div class="col">
+                <h3 class="text-center">Want to keep track of your albums?  <a href="$( linkto(:login) )">Login</a></h3>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <h3 class="text-center">No Account yet? <a href="$( linkto(:register) )">Register</a></h3>
+            </div>
+        </div>
+    </div>
+    <% end %>
+    <div class="row mt-4">
+        <div class="col text-center">
+        <small>
+            Not looking like a top 1001 album? Heres the original list entry: <br>
+            $(album.list_entry)
+        </small>
+    </div>
+    </div>
+</div>
