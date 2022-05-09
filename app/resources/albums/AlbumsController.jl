@@ -50,4 +50,8 @@ function dont_do()
     redirect(:home)
 end
 
+function what()
+    html(:albums, :what)
+end
+
 end

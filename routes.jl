@@ -9,6 +9,10 @@ route("/", named=:home) do;
     return AlbumsController.show_user()
 end
 
+route("/what", named=:what) do;
+    return AlbumsController.what()
+end
+
 route("/save_rating", method = POST, named=:save_rating) do; @authenticated!
     value = parse(Int64, postpayload(:value, -1))
     AlbumsController.save_rating(
