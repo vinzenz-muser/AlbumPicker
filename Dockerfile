@@ -6,21 +6,23 @@ RUN useradd --create-home --shell /bin/bash genie
 
 # set up the app
 RUN mkdir /home/genie/app
-COPY . /home/genie/app
+COPY --chown=genie . /home/genie/app
 WORKDIR /home/genie/app
 
 # configure permissions
 RUN chown genie:genie -R *
+RUN chown genie:genie -R /home/genie 
 
 RUN chmod +x bin/repl
 RUN chmod +x bin/server
 RUN chmod +x bin/runtask
 
+
 # switch user
 USER genie
 
 # instantiate Julia packages
-RUN julia -e "using Pkg; Pkg.activate(\".\"); Pkg.instantiate(); Pkg.precompile(); "
+RUN julia --project -e "using Pkg; Pkg.instantiate(); Pkg.precompile(); "
 
 # ports
 EXPOSE 8000
